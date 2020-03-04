@@ -25,12 +25,14 @@ public class BookstoreApplication {
 	public CommandLineRunner bookstoreDemo(BookRepository repo, CategoryRepository repo2) {
 		return (args) -> {
 
-			log.info("Toimii ennen addaamista.");
-			repo.save(new Book("Kirja 1", "A A", 1900, "123", 9.99));
-			repo.save(new Book("Kirja 2 ", "B B", 2000, "456", 19.99));
-			repo.save(new Book("Kirja 3", "C C", 2100, "789", 29.99));
 			repo2.save(new Category("Erotiikka"));
 			repo2.save(new Category("Politiikka"));
+			repo2.save(new Category("Eroottinen politiikka"));
+			log.info("Toimii ennen addaamista.");
+			repo.save(new Book("Kirja 1", "A A", 1900, "123", 9.99, repo2.findByName("Erotiikka").get(0)));
+			repo.save(new Book("Kirja 2 ", "B B", 2000, "456", 19.99,repo2.findByName("Politiikka").get(0)));
+			repo.save(new Book("Kirja 3", "C C", 2100, "789", 29.99, repo2.findByName("Eroottinen politiikka").get(0)));
+
 
 			for (Book book : repo.findAll()) {
 				log.info(book.toString());
