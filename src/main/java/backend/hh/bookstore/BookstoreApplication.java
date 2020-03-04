@@ -9,31 +9,51 @@ import org.springframework.context.annotation.Bean;
 
 import backend.hh.bookstore.domain.Book;
 import backend.hh.bookstore.domain.BookRepository;
-
-
+import backend.hh.bookstore.domain.Category;
+import backend.hh.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
+
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 
-	
-	@Bean
-	public CommandLineRunner bookstoreDemo(BookRepository repo) {
+	@Bean // tähän voi tunkea loputtomasti argumentteja näköjään?
+	public CommandLineRunner bookstoreDemo(BookRepository repo, CategoryRepository repo2) {
 		return (args) -> {
-		
+
 			log.info("Toimii ennen addaamista.");
 			repo.save(new Book("Kirja 1", "A A", 1900, "123", 9.99));
 			repo.save(new Book("Kirja 2 ", "B B", 2000, "456", 19.99));
 			repo.save(new Book("Kirja 3", "C C", 2100, "789", 29.99));
+			repo2.save(new Category("Erotiikka"));
+			repo2.save(new Category("Politiikka"));
 
 			for (Book book : repo.findAll()) {
 				log.info(book.toString());
 			}
 
+			for (Category category : repo2.findAll()) {
+				log.info(category.toString());
+			}
+
 		};
 	}
+
+//		@Bean
+//		public CommandLineRunner lisataanpaKategorioita(CategoryRepository repo) {
+//			return (args) -> {
+//
+//				repo.save(new Category("Erotiikka"));
+//				repo.save(new Category("Politiikka"));
+//				
+////				for (Book book : repo.findAll()) {
+////					log.info(book.toString());
+////				}
+//
+//			};
+//	}
 }
