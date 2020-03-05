@@ -17,8 +17,9 @@ public class Category {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Book> books;
-	
-	
+
+
+
 	public List<Book> getBooks() {
 		return books;
 	}
