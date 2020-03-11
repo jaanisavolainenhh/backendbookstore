@@ -40,6 +40,7 @@ public Book(String title, String author, int year, String isbn, double price, Ca
 public Category getCategory() {
 	return category;
 }
+//
 
 public void setCategory(Category category) {
 	this.category = category;
