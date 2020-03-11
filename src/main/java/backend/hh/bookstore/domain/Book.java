@@ -7,6 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Book {
 @Id
@@ -18,7 +21,8 @@ private int year;
 private String isbn;
 private double price;
 
-@ManyToOne
+@ManyToOne	
+//@JsonIgnore //Siirretty tämä Categoryyn jotta saataisiin "oikea" data kirjasta jossa myös categoria.
 @JoinColumn(name = "category")
 private Category category;
 
@@ -83,6 +87,6 @@ public Book() {
 @Override
 public String toString() {
 	return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
-			+ ", price=" + price + ", category=" + category + "]";
+			+ ", price=" + price + "]";
 }
 }
