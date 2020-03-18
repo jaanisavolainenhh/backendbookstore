@@ -49,6 +49,10 @@ public class BookController {
 	}
 	
 	
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
 
 	@GetMapping("/delete/{id}")
 	public String bookDelete(@PathVariable("id") Long id, Model model) {
